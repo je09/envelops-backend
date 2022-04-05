@@ -1,8 +1,11 @@
-from fastapi import Depends, FastAPI, Response, status
+from fastapi import Depends, FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import group
+from app.middleware import valid_check
+from app.database import create_tables
 
 app = FastAPI()
+create_tables()
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,4 +21,4 @@ def index():
     return {"result": "ok"}
 
 
-app.include_router(group.router, prefix="/groups", tags=["groups"])
+app.include_router(group.router, prefix="/groups", tags=["groups"], dependencies=[Depends(valid_check)])

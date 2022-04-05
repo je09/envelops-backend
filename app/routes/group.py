@@ -1,22 +1,27 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
+from typing import List, Optional
 from app.internal.group import schemas
 from app.internal.group import crud
 from app.dependencies import get_db
-from app.internal.utils import is_valid
-
-from urllib.parse import urlparse, parse_qsl, urlencode
+from app.internal.utils import vk_params_parse
 
 router = APIRouter()
 
 
-@router.post("/")
-def create_user(group: schemas.Group, db=Depends(get_db)):
-    # return crud.create_group(db, group)
-    u = 'example.com/' + group.params
-    client_secret = 'h6Udtkw8FTCFTzxcms24'
-    query_params = dict(parse_qsl(urlparse(u).query, keep_blank_values=True))
-    status = is_valid(query=query_params, secret=client_secret)
+@router.post("/", status_code=status.HTTP_201_CREATED)
+def create_group(group: schemas.Group, db=Depends(get_db)):
+    crud.create_group(db, group, vk_params_parse(group.params))
     return {
         "result": "ok",
         "error": "",
     }
+
+
+@router.get("/{client_id}", response_model=List[schemas.ResponseGroup], status_code=status.HTTP_200_OK)
+def get_groups(client_id: int, db=Depends(get_db)):
+    return crud.read_groups(db, client_id)
+
+
+@router.delete("/", status_code=status.HTTP_202_ACCEPTED)
+def delete_group(group: schemas.Group, db=Depends(get_db)):
+    crud.delete_group(db, group, vk_params_parse(group.params))
