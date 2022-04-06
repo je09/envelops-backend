@@ -1,6 +1,6 @@
 from fastapi import Depends, FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import group
+from app.routes import group, user, scenario
 from app.middleware import valid_check
 from app.database import create_tables
 
@@ -22,3 +22,5 @@ def index():
 
 
 app.include_router(group.router, prefix="/groups", tags=["groups"], dependencies=[Depends(valid_check)])
+app.include_router(user.router, prefix="/users", tags=["users"], dependencies=[Depends(valid_check)])
+app.include_router(scenario.router, prefix="/scenarios", tags=["scenarios"], dependencies=[Depends(valid_check)])

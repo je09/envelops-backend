@@ -48,8 +48,7 @@ def is_valid(query: dict, secret: str) -> bool:
 
 
 def vk_params_parse(params: str):
+    if not params:
+        return dict()
+
     return dict(parse_qsl(urlparse(params).query, keep_blank_values=True))
-
-
-# url = "https://example.com/?vk_user_id=494075&vk_app_id=6736218&vk_is_app_user=1&vk_are_notifications_enabled=1&vk_language=ru&vk_access_token_settings=&vk_platform=android&sign=exTIBPYTrAKDTHLLm2AwJkmcVcvFCzQUNyoa6wAjvW6k"
-# client_secret = "wvl68m4dR1UpLrVRli" # Защищённый ключ из настроек вашего приложения
