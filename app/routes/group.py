@@ -25,17 +25,3 @@ def get_groups(client_id: int, db=Depends(get_db)):
 @router.delete("/", status_code=status.HTTP_202_ACCEPTED)
 def delete_group(group: schemas.Group, db=Depends(get_db)):
     crud.delete_group(db, group, vk_params_parse(group.params))
-
-
-@router.post("/scenario", status_code=status.HTTP_201_CREATED)
-def create_scenario(scenario: schemas.Scenario, db=Depends(get_db)):
-    crud.create_scenario(db, scenario)
-    return {
-        "result": "ok",
-        "error": "",
-    }
-
-
-@router.get("/scenario/{group_id}", status_code=status.HTTP_200_OK)
-def get_scenarios(group_id: int, db=Depends(get_db)):
-    return crud.read_scenarios(db, group_id)

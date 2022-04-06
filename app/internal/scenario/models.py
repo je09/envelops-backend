@@ -3,10 +3,18 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 
-class Scenarios(Base):
+class ScenarioTemplate(Base):
+    __tablename__ = 'templates'
+
+    type = Column(Integer, primary_key=True)
+    name = Column(String)
+    description = Column(String)
+
+
+class Scenario(Base):
     __tablename__ = 'scneario'
 
     id = Column(Integer, primary_key=True)
-    scenario_id = Column(Integer)
+    group_id = Column(Integer)
     type = Column(Integer)
     data = Column(JSON)

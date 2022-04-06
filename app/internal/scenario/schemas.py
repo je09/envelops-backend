@@ -2,11 +2,11 @@ from pydantic import BaseModel
 from typing import Optional, List
 
 
-class ResponseCookies(BaseModel):
+class ResponseScenario(BaseModel):
     scenario_id: int
 
 
-class RequestCookies(BaseModel):
+class RequestScenario(BaseModel):
     data: str
     texts: List[str]
 
