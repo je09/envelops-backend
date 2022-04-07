@@ -4,6 +4,8 @@ from app.config import SECRET
 
 
 async def valid_check(request: Request):
+    return
+
     if request.method == "GET":
         return
 

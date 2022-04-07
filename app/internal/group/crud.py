@@ -17,3 +17,7 @@ def read_groups(db: Session, creator_id: int):
 
 def delete_group(db: Session, group, params: dict):
     return db.delete(Group).where(Group.creator_id == params["vk_user_id"] and Group.group_id == group.group_id)
+
+
+def read_token(db: Session, group_id: int):
+    return db.query(Group).where(Group.group_id == group_id).first().token

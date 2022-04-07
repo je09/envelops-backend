@@ -2,6 +2,14 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-class User(BaseModel):
-    user_id: int
+class RequestUser(BaseModel):
+    scenario_id: int
     params: Optional[str]
+
+
+class User(BaseModel):
+    scenario_id: int
+    sex: int
+    country: int
+    city: str
+    occupation: str

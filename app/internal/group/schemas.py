@@ -13,13 +13,3 @@ class ResponseGroup(BaseModel):
 
     class Config:  # to convert non dict obj to json
         orm_mode = True
-
-
-class Scenario(BaseModel):
-    name: str
-    type: int
-    group_id: int
-    params: Optional[str]
-
-    class Config:  # to convert non dict obj to json
-        orm_mode = True
