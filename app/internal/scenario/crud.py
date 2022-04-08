@@ -14,6 +14,10 @@ def read_scenarios(db: Session, group_id: int):
     return db.query(Scenario).where(Scenario.group_id == group_id).all()
 
 
+def read_scenario(db: Session, scenario_id: int):
+    return db.query(Scenario).where(Scenario.id == scenario_id).first()
+
+
 def read_group_id(db: Session, scenario_id: int):
     return db.query(Scenario).where(Scenario.id == scenario_id).first().group_id
 

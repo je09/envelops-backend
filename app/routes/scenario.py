@@ -28,6 +28,11 @@ def get_scenarios(group_id: int, db=Depends(get_db)):
     return crud.read_scenarios(db, group_id)
 
 
+@router.get("/read/{scenario_id}", status_code=status.HTTP_200_OK)
+def get_scenario(scenario_id: int, db=Depends(get_db)):
+    return crud.read_scenario(db, scenario_id)
+
+
 @router.post("/define")
 def define_scenario(scenario: schemas.DefineScenario, db=Depends(get_db)):
     scenario_id = crud.update_scenario(db, scenario)
