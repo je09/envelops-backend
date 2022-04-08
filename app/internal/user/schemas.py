@@ -10,6 +10,6 @@ class RequestUser(BaseModel):
 class User(BaseModel):
     scenario_id: int
     sex: int
-    country: int
+    country: str
     city: str
     occupation: str

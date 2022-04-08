@@ -3,7 +3,11 @@ from app.internal.user.models import User
 
 
 def create_user(db: Session, user):
-    db_user = User(user.id, user.sex, user.country, user.city, user.occupation)
+    db_user = User()
+    db_user.sex = user.sex
+    db_user.country = user.country
+    db_user.city = user.city
+    db_user.occupation = user.occupation
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

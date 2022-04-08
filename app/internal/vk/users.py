@@ -15,7 +15,7 @@ def __request(vk_id: int, vk_token: int):
     if r.status_code != 200:
         pass
 
-    return r.json()
+    return r.json()["response"][0]
 
 
 def get(db: Session, vk_params: dict, scenario_id: int):

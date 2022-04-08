@@ -14,9 +14,9 @@ def create_user(user: schemas.RequestUser, db=Depends(get_db)):
     user_db = crud.create_user(db, schemas.User(
         scenario_id=user.scenario_id,
         sex=user_info["sex"],
-        ccountry=user_info["country"],
-        city=user_info["city"],
-        occupation=user_info["occupation"]["type"]
+        country={True: user_info["country"]["title"], False: ""}["country" in user_info],
+        city={True: user_info["city"]["title"], False: ""}["city" in user_info],
+        occupation=user_info["occupation"]["type"] if "occupation" in user_info else ""
     ))
 
     return {
